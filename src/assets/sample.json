@@ -1,0 +1,27 @@
+{
+  "GeneralProfile": {
+    "entity": {
+      "name": "Community Resource Center",
+      "location": {
+        "city": "Springfield",
+        "state": "Illinois",
+        "country": "USA"
+      }
+    },
+    "management": {
+      "head": "Jordan Lee",
+      "coordinator": "Alex Kim",
+      "support_team": {
+        "lead": "Taylor Morgan",
+        "event_deadline": "2025-08-15"
+      }
+    },
+    "facilities": {
+      "information_hub": {
+        "name": "Public Access Library",
+        "resources_available": 7500,
+        "digital_access": true
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "name": "@syncfusion/ej2-react-jsonandxml-to-diagram-visualizer",
+  "version": "0.0.1",
+  "description": "Essential JS 2 for React - JSON and XML to Diagram Layout",
+  "author": "Syncfusion Inc.",
+  "license": "SEE LICENSE IN license",
+  "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
+    "@syncfusion/ej2-react-buttons": "*",
+    "@syncfusion/ej2-react-diagrams": "*",
+    "@syncfusion/ej2-react-dropdowns": "*",
+    "@syncfusion/ej2-react-inputs": "*",
+    "@syncfusion/ej2-react-navigations": "*",
+    "@syncfusion/ej2-react-popups": "*",
+    "@syncfusion/ej2-react-splitbuttons": "*",
+    "fast-xml-parser": "^5.2.5",
+    "monaco-editor": "^0.52.2",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.2.0",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "*",
+    "typescript": "^4.6.4",
+    "web-vitals": "*",
+    "react-router-dom": "^6.14.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^27.5.1",
+    "@types/node": "^20.4.1",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "style-loader": "^0.23.1",
+    "typescript": "^4.0.0",
+    "@syncfusion/ej2-showcase-helper": "*",
+    "@types/react-router-dom": "^5.3.3",
+    "css-loader": "^6.8.1",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "terser-webpack-plugin": "^5.3.9",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --open --mode development",
+    "build": "webpack --mode production",
+    "ci-publish": "gulp publish-sample",
+    "hide-license": "gulp hide-license"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
