@@ -46,6 +46,16 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     clean: true, // Cleans output folder before each build (optional, but good to add)
   },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "public"),
+    },
+    compress: true,
+    port: 8080,
+    open: true,
+    hot: true,
+    allowedHosts: "all", // For webpack-dev-server 5.x compatibility
+  },
   optimization: {
     minimize: true,
     minimizer: [new TerserPlugin({

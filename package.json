@@ -41,10 +41,10 @@
     "ts-loader": "^9.5.1",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "webpack-dev-server": "^5.2.1"
   },
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
+    "start": "webpack serve --open --mode development",
     "build": "webpack --mode production",
     "ci-publish": "gulp publish-sample",
     "hide-license": "gulp hide-license"
