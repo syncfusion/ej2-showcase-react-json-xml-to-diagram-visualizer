@@ -32,14 +32,21 @@ const MENU_STYLES = {
   HIDE_CARET: 'e-caret-hide'
 } as const;
 
-const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
-  onExportImage,
-  onRotateLayout,
-  onCollapseGraph,
-  isGraphCollapsed
-}) => {
-  // Create base menu items configuration
-  const getBaseMenuItems = useCallback((): ItemModel[] => [
+  // Update collapse/expand menu item based on graph state
+  export const updateCollapseMenuItem = (items: ItemModel[], isCollapsed: boolean): ItemModel[] => {
+    return items.map(item => 
+      item.id === MENU_IDS.COLLAPSE_GRAPH 
+        ? {
+            ...item,
+            text: isCollapsed ? 'Expand Graph' : 'Collapse Graph',
+            iconCss: isCollapsed ? MENU_ICONS.EXPAND : MENU_ICONS.COLLAPSE
+          }
+        : item
+    );
+  };
+
+    // Create base menu items configuration
+  export const getBaseMenuItems = (): ItemModel[] => [
     { 
       text: 'Export as Image', 
       id: MENU_IDS.EXPORT_IMAGE, 
@@ -55,23 +62,19 @@ const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
       id: MENU_IDS.COLLAPSE_GRAPH, 
       iconCss: MENU_ICONS.COLLAPSE 
     }
-  ], []);
+  ];
+
+const HamburgerMenu: React.FC<HamburgerMenuProps> = ({
+  onExportImage,
+  onRotateLayout,
+  onCollapseGraph,
+  isGraphCollapsed
+}) => {
 
   // State management for menu items
   const [menuItems, setMenuItems] = useState<ItemModel[]>(getBaseMenuItems);
 
-  // Update collapse/expand menu item based on graph state
-  const updateCollapseMenuItem = useCallback((items: ItemModel[], isCollapsed: boolean): ItemModel[] => {
-    return items.map(item => 
-      item.id === MENU_IDS.COLLAPSE_GRAPH 
-        ? {
-            ...item,
-            text: isCollapsed ? 'Expand Graph' : 'Collapse Graph',
-            iconCss: isCollapsed ? MENU_ICONS.EXPAND : MENU_ICONS.COLLAPSE
-          }
-        : item
-    );
-  }, []);
+
 
   // Update menu items when graph collapse state changes
   useEffect(() => {
