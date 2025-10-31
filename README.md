@@ -16,3 +16,7 @@ npm install
 ## To Run the application
 
 Run `npm start` for a dev server. Navigate to `http://localhost:8080/`.
+
+## Live Demo
+
+https://ej2.syncfusion.com/showcase/react/jsonandxmltodiagramvisualizer/
