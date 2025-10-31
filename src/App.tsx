@@ -16,6 +16,7 @@ import {
 } from "@syncfusion/ej2-react-diagrams";
 import Editor from "@monaco-editor/react";
 import { XMLBuilder, XMLParser } from "fast-xml-parser";
+import {getBaseMenuItems, updateCollapseMenuItem} from "./components/HamburgerMenu/HamburgerMenu";
 
 // Components
 import NavMenu from "./components/NavMenu/NavMenu";
@@ -59,7 +60,6 @@ const DIAGRAM_CONSTANTS = {
 } as const;
 
 const LAYOUT_ORIENTATIONS = ["LeftToRight", "TopToBottom", "RightToLeft", "BottomToTop"] as const;
-
 const AppContent: React.FC = () => {
   const { theme, themeSettings, setTheme } = useTheme();
   const currentThemeSettingsRef = useRef(themeSettings);
@@ -198,7 +198,7 @@ const AppContent: React.FC = () => {
   const refreshDiagramLayout = () => {
     if (diagramComponentRef.current) {
       diagramComponentRef.current.refresh();
-      diagramComponentRef.current.fitToPage({canZoomIn:true});
+      diagramComponentRef.current.fitToPage({ mode: "Page", region: "Content", canZoomIn: true });
     }
   };
 
@@ -212,6 +212,9 @@ const AppContent: React.FC = () => {
     setEditorTextContent(updatedContent);
     parseAndProcessEditorContent(updatedContent, selectedEditorType);
     refreshDiagramLayout();
+    setIsEntireGraphCollapsed(false);
+    let menuItems = getBaseMenuItems()
+    updateCollapseMenuItem(menuItems, isEntireGraphCollapsed);
   }, [selectedEditorType]);
 
   // Handle switching between JSON and XML editor types with content conversion
@@ -226,6 +229,9 @@ const AppContent: React.FC = () => {
       console.error("Conversion error:", error);
       setIsEditorContentValid(false);
     }
+    setIsEntireGraphCollapsed(false);
+    let menuItems = getBaseMenuItems()
+    updateCollapseMenuItem(menuItems, isEntireGraphCollapsed);
   }, [selectedEditorType, editorTextContent]);
 
   // Convert content between different editor types (JSON <-> XML)
@@ -884,6 +890,20 @@ const AppContent: React.FC = () => {
     return configureNode(nodeModel, isLeafNode, isMainRootNode);
   };
 
+  function handleExpandStateChange (args: any) {
+    const node = args.element;
+    if (!node || typeof node !== 'object') {
+        return;
+    }
+    // Check if it's a root node (no incoming edges)
+    const isRootNode = !node.inEdges || node.inEdges.length === 0;
+    if (isRootNode) {
+        setIsEntireGraphCollapsed(!node.isExpanded);
+        let menuItems = getBaseMenuItems()
+        updateCollapseMenuItem(menuItems, isEntireGraphCollapsed);
+    }
+};
+
   // Get default connector configuration for diagram component
   const getDefaultConnectorConfiguration = (connectorModel: ConnectorModel): ConnectorModel => {
     connectorModel.type = "Orthogonal";
@@ -980,6 +1000,7 @@ const AppContent: React.FC = () => {
             }}
             tool={DiagramTools.SingleSelect | DiagramTools.ZoomPan}
             click={handleDiagramNodeClick}
+            expandStateChange={handleExpandStateChange}
             getNodeDefaults={getDefaultNodeConfiguration}
             getConnectorDefaults={getDefaultConnectorConfiguration}
           >
